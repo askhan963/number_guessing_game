@@ -19,6 +19,7 @@ else
     echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
   done
 fi
+
 SECRET_NUMBER=$(( RANDOM % 1000 + 1 ))
 echo "Guess the secret number between 1 and 1000:"
 NUMBER_OF_GUESSES=0
@@ -43,6 +44,7 @@ do
     fi
   fi
 done
+
 if [[ -z $USER_INFO ]]
 then
   UPDATE_USER_RESULT=$($PSQL "UPDATE users SET games_played=1, best_game=$NUMBER_OF_GUESSES WHERE username='$USERNAME'")
