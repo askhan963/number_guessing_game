@@ -55,3 +55,4 @@ else
     UPDATE_USER_RESULT=$($PSQL "UPDATE users SET games_played=$GAMES_PLAYED, best_game=$BEST_GAME WHERE username='$USERNAME'")
   done
 fi
+ 
