@@ -1,5 +1,7 @@
 #!/bin/bash
+
 PSQL="psql --username=freecodecamp --dbname=number_guess -t --no-align -c"
+
 echo "Enter your username:"
 read USERNAME
 
@@ -41,18 +43,3 @@ do
     fi
   fi
 done
-if [[ -z $USER_INFO ]]
-then
-  UPDATE_USER_RESULT=$($PSQL "UPDATE users SET games_played=1, best_game=$NUMBER_OF_GUESSES WHERE username='$USERNAME'")
-else
-  echo "$USER_INFO" | while IFS="|" read USER_ID GAMES_PLAYED BEST_GAME
-  do
-    GAMES_PLAYED=$((GAMES_PLAYED + 1))
-    if [[ $BEST_GAME -eq 0 || $NUMBER_OF_GUESSES -lt $BEST_GAME ]]
-    then
-      BEST_GAME=$NUMBER_OF_GUESSES
-    fi
-    UPDATE_USER_RESULT=$($PSQL "UPDATE users SET games_played=$GAMES_PLAYED, best_game=$BEST_GAME WHERE username='$USERNAME'")
-  done
-fi
- 
